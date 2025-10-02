@@ -18,8 +18,8 @@ jobs:
 
       - name: Configure Git user
         run: |
-          git config --global user.email "ci@calendar-api.com"
-          git config --global user.name "Calendar API CI"
+          git config --global user.email "ci@velaris-api.com"
+          git config --global user.name "Velaris API CI"
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -33,7 +33,7 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_REF: ${{ github.ref }}
         run: |
-          if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
             echo "🔥 Performing release"
             ./gradlew release publish
           else
