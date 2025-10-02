@@ -1,0 +1,40 @@
+put:
+  tags:
+    - notes
+  summary: Aktualizacja notatki
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/note.yaml"
+  responses:
+    "200":
+      description: Zaktualizowana notatka
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/note.yaml"
+delete:
+  tags:
+    - notes
+  summary: Usunięcie notatki
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "204":
+      description: Usunięto notatkę

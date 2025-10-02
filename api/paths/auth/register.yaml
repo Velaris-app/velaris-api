@@ -1,0 +1,17 @@
+post:
+  tags:
+    - auth
+  summary: Rejestracja użytkownika
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/register-request.yaml"
+  responses:
+    "200":
+      description: Zarejestrowany użytkownik + token
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/jwt-response.yaml"

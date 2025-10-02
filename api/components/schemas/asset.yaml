@@ -1,0 +1,34 @@
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  category:
+    type: string
+  description:
+    type: string
+  purchasePrice:
+    type: number
+  currency:
+    type: string
+  condition:
+    type: string
+  year:
+    type: integer
+  quantity:
+    type: integer
+  images:
+    type: array
+    items:
+      type: string
+  tags:
+    type: array
+    items:
+      type: string
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

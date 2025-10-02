@@ -1,0 +1,17 @@
+post:
+  tags:
+    - auth
+  summary: Logowanie użytkownika
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/login-request.yaml"
+  responses:
+    "200":
+      description: Token JWT
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/jwt-response.yaml"

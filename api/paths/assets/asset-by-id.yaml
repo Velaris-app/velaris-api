@@ -1,0 +1,59 @@
+get:
+  tags:
+    - assets
+  summary: Pobranie pojedynczego aktywa
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Aktywo
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/asset.yaml"
+put:
+  tags:
+    - assets
+  summary: Aktualizacja aktywa
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/asset.yaml"
+  responses:
+    "200":
+      description: Zaktualizowane aktywo
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/asset.yaml"
+delete:
+  tags:
+    - assets
+  summary: Usunięcie aktywa
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "204":
+      description: Usunięto aktywo

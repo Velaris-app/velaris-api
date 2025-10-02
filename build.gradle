@@ -1,0 +1,126 @@
+plugins {
+    id 'org.openapi.generator' version '7.6.0'
+    id 'java'
+    id 'maven-publish'
+    id 'net.researchgate.release' version '3.0.2'
+}
+
+group = 'com.velaris.api'
+
+def baseVersion = project.version
+def gitRef = System.getenv("GITHUB_REF") ?: "refs/heads/local"
+def isMasterBranch = gitRef.endsWith("/master")
+version = isMasterBranch ? baseVersion : "${baseVersion}-SNAPSHOT"
+
+ext {
+    springBootVersion = '3.5.3'
+    jacksonKotlinVersion = '2.19.1'
+    swaggerAnnotationsVersion = '2.2.31'
+    springdocVersion = '2.8.9'
+    jacksonDatabindVersion = '0.2.6'
+}
+
+repositories {
+    mavenCentral()
+}
+
+def generatedDir = layout.buildDirectory.dir("generated/api").get().asFile
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+sourceSets {
+    main {
+        java.srcDirs += file("${generatedDir}/src/main/java")
+    }
+}
+
+dependencies {
+    implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindVersion"
+
+    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
+
+    compileOnly "io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion"
+    compileOnly "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    dependsOn tasks.named("openApiGenerate")
+}
+
+tasks.named("compileJava") {
+    dependsOn tasks.named("openApiGenerate")
+}
+
+tasks.withType(PublishToMavenRepository).configureEach {
+    dependsOn tasks.named("openApiGenerate")
+}
+
+openApiGenerate {
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/api/velaris-api.yaml")
+    outputDir.set(generatedDir.toString())
+
+    packageName.set("com.velaris")
+    apiPackage.set("com.velaris.api")
+    modelPackage.set("com.velaris.api.model")
+    invokerPackage.set("com.velaris.api.invoker")
+
+    configOptions.set([
+            "interfaceOnly": "true",
+            "dateLibrary": "java8",
+            "useSpringBoot3": "true",
+            "useTags": "true",
+    ])
+}
+
+tasks.named("openApiGenerate") {
+    doFirst {
+        delete generatedDir
+    }
+}
+
+tasks.register("generateServer") {
+    dependsOn tasks.named("openApiGenerate")
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            from components.java
+            groupId = project.group
+            artifactId = "velaris-api"
+            version = project.version
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/collab-timekit/calendar-api")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user")
+                password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.token")
+            }
+        }
+    }
+}
+
+release {
+    tagTemplate = 'v${version}'
+    versionPropertyFile = 'gradle.properties'
+    failOnSnapshotDependencies = false
+    preTagCommitMessage = '[Release] - pre tag'
+    tagCommitMessage = '[Release] - tag v${version}'
+    newVersionCommitMessage = '[Release] - next version bumped to '
+
+    git {
+        requireBranch.set("master")
+    }
+}

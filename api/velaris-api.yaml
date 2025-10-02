@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: Velaris API
+  version: "1.0.0"
+  description: API dla aplikacji Velaris – śledzenie inwestycji i kolekcji (MVP)
+servers:
+  - url: https://api.velaris.app/api/v1
+    description: Production server
+  - url: http://localhost:8080/api/v1
+    description: Local dev server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      $ref: './components/schemas/user.yaml'
+
+    JwtResponse:
+      $ref: './components/schemas/jwt-response.yaml'
+
+    RegisterRequest:
+      $ref: './components/schemas/register-request.yaml'
+
+    LoginRequest:
+      $ref: './components/schemas/login-request.yaml'
+
+    Asset:
+      $ref: './components/schemas/asset.yaml'
+
+    Note:
+      $ref: './components/schemas/note.yaml'
+
+    Stat:
+      $ref: './components/schemas/stat.yaml'
+
+    CategorySummaryItem:
+      $ref: './components/schemas/category-summary-item.yaml'
+
+paths:
+  /auth/register:
+    $ref: './paths/auth/register.yaml'
+
+  /auth/login:
+    $ref: './paths/auth/login.yaml'
+
+  /assets:
+    $ref: './paths/assets/assets.yaml'
+
+  /assets/{id}:
+    $ref: './paths/assets/asset-by-id.yaml'
+
+  /notes:
+    $ref: './paths/notes/notes.yaml'
+
+  /notes/{id}:
+    $ref: './paths/notes/notes-by-id.yaml'
+
+  /stats:
+    $ref: './paths/stats/stats.yaml'

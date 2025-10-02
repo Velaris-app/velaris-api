@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: string
+  assetId:
+    type: string
+  content:
+    type: string
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time

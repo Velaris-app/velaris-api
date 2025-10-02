@@ -1,0 +1,34 @@
+get:
+  tags:
+    - assets
+  summary: Pobranie listy aktywów użytkownika
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Lista aktywów
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../components/schemas/asset.yaml"
+post:
+  tags:
+    - assets
+  summary: Dodanie nowego aktywa
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/asset.yaml"
+  responses:
+    "201":
+      description: Utworzone aktywo
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/asset.yaml"

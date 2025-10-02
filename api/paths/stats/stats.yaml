@@ -1,0 +1,13 @@
+get:
+  tags:
+    - stats
+  summary: Pobranie statystyk portfolio użytkownika
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Statystyki portfolio
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/stat.yaml"
