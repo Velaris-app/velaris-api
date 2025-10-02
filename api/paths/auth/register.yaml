@@ -2,6 +2,7 @@ post:
   tags:
     - auth
   summary: Rejestracja użytkownika
+  operationId: register
   requestBody:
     required: true
     content:

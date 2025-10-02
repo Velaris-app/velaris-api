@@ -2,6 +2,7 @@ get:
   tags:
     - notes
   summary: Pobranie wszystkich notatek użytkownika
+  operationId: getAssetNotes
   security:
     - bearerAuth: []
   responses:
@@ -17,6 +18,7 @@ post:
   tags:
     - notes
   summary: Dodanie notatki
+  operationId: addAssetNote
   security:
     - bearerAuth: []
   requestBody:

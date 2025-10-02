@@ -2,6 +2,7 @@ get:
   tags:
     - stats
   summary: Pobranie statystyk portfolio użytkownika
+  operationId: getStats
   security:
     - bearerAuth: []
   responses:

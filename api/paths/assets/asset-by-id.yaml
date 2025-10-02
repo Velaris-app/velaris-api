@@ -2,6 +2,7 @@ get:
   tags:
     - assets
   summary: Pobranie pojedynczego aktywa
+  operationId: getAsset
   security:
     - bearerAuth: []
   parameters:
@@ -21,6 +22,7 @@ put:
   tags:
     - assets
   summary: Aktualizacja aktywa
+  operationId: modifyAsset
   security:
     - bearerAuth: []
   parameters:
@@ -46,6 +48,7 @@ delete:
   tags:
     - assets
   summary: Usunięcie aktywa
+  operationId: deleteAsset
   security:
     - bearerAuth: []
   parameters:

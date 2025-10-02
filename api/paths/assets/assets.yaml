@@ -2,6 +2,7 @@ get:
   tags:
     - assets
   summary: Pobranie listy aktywów użytkownika
+  operationId: listAssets
   security:
     - bearerAuth: []
   responses:
@@ -17,6 +18,7 @@ post:
   tags:
     - assets
   summary: Dodanie nowego aktywa
+  operationId: addAsset
   security:
     - bearerAuth: []
   requestBody:
