@@ -74,6 +74,7 @@ openApiGenerate {
 
     configOptions.set([
             "interfaceOnly": "true",
+            "skipDefaultInterface": "true",
             "dateLibrary": "java8",
             "useSpringBoot3": "true",
             "useTags": "true",
