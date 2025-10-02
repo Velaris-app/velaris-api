@@ -9,7 +9,7 @@ group = 'com.velaris.api'
 
 def baseVersion = project.version
 def gitRef = System.getenv("GITHUB_REF") ?: "refs/heads/local"
-def isMasterBranch = gitRef.endsWith("/master")
+def isMasterBranch = gitRef.endsWith("/main")
 version = isMasterBranch ? baseVersion : "${baseVersion}-SNAPSHOT"
 
 ext {
@@ -121,6 +121,6 @@ release {
     newVersionCommitMessage = '[Release] - next version bumped to '
 
     git {
-        requireBranch.set("master")
+        requireBranch.set("main")
     }
 }
