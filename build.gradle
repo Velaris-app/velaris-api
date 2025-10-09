@@ -2,23 +2,19 @@ plugins {
     id 'org.openapi.generator' version '7.6.0'
     id 'java'
     id 'maven-publish'
-    id 'net.researchgate.release' version '3.0.2'
+    id 'pl.allegro.tech.build.axion-release' version '1.20.1'
 }
 
 group = 'com.velaris.api'
 
-def baseVersion = project.version
-def gitRef = System.getenv("GITHUB_REF") ?: "refs/heads/local"
-def isMasterBranch = gitRef.endsWith("/main")
-version = isMasterBranch ? baseVersion : "${baseVersion}-SNAPSHOT"
-
-ext {
-    springBootVersion = '3.5.3'
-    jacksonKotlinVersion = '2.19.1'
-    swaggerAnnotationsVersion = '2.2.31'
-    springdocVersion = '2.8.9'
-    jacksonDatabindVersion = '0.2.6'
+scmVersion {
+    tag {
+        prefix = 'v'
+    }
+    versionIncrementer 'incrementPatch'
 }
+
+project.version = scmVersion.version
 
 repositories {
     mavenCentral()
@@ -41,13 +37,13 @@ sourceSets {
 }
 
 dependencies {
-    implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindVersion"
+    implementation(libs.jackson.databind.nullable)
 
-    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootVersion"
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.validation)
 
-    compileOnly "io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion"
-    compileOnly "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion"
+    compileOnly(libs.swagger.annotations)
+    compileOnly(libs.springdoc.openapi.ui)
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -110,18 +106,5 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.token")
             }
         }
-    }
-}
-
-release {
-    tagTemplate = 'v${version}'
-    versionPropertyFile = 'gradle.properties'
-    failOnSnapshotDependencies = false
-    preTagCommitMessage = '[Release] - pre tag'
-    tagCommitMessage = '[Release] - tag v${version}'
-    newVersionCommitMessage = '[Release] - next version bumped to '
-
-    git {
-        requireBranch.set("main")
     }
 }

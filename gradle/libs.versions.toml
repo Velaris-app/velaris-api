@@ -1,0 +1,14 @@
+[versions]
+jackson-databind = "0.2.6"
+spring-boot = "3.5.3"
+swagger-annotations = "2.2.31"
+springdoc = "2.8.9"
+
+[libraries]
+jackson-databind-nullable = { module = "org.openapitools:jackson-databind-nullable", version.ref = "jackson-databind" }
+
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "spring-boot" }
+
+swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swagger-annotations" }
+springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
