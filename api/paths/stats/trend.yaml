@@ -1,0 +1,17 @@
+/stats/trend:
+  get:
+    tags:
+      - stats
+    summary: Trend wartości portfolio w czasie
+    operationId: getStatsTrend
+    security:
+      - bearerAuth: []
+    responses:
+      "200":
+        description: Trend wartości portfolio
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "../../components/schemas/stats-trend-item.yaml"

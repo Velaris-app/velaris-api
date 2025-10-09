@@ -1,0 +1,15 @@
+/stats/overview:
+  get:
+    tags:
+      - stats
+    summary: Podsumowanie całego portfolio
+    operationId: getStatsOverview
+    security:
+      - bearerAuth: []
+    responses:
+      "200":
+        description: Podsumowanie portfolio
+        content:
+          application/json:
+            schema:
+              $ref: "../../components/schemas/stats-overview.yaml"

@@ -1,0 +1,9 @@
+type: object
+properties:
+  category:
+    type: string
+  totalValue:
+    type: number
+    format: double
+  itemCount:
+    type: integer

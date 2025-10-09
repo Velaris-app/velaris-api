@@ -33,11 +33,14 @@ components:
     Note:
       $ref: './components/schemas/note.yaml'
 
-    Stat:
-      $ref: './components/schemas/stat.yaml'
+    StatsOverview:
+      $ref: './components/schemas/stats-overview.yaml'
 
-    CategorySummaryItem:
-      $ref: './components/schemas/category-summary-item.yaml'
+    StatsCategoryItem:
+      $ref: './components/schemas/stats-category-item.yaml'
+
+    StatsTrendItem:
+      $ref: './components/schemas/stats-trend-item.yaml'
 
 paths:
   /auth/register:
@@ -52,11 +55,11 @@ paths:
   /assets/{id}:
     $ref: './paths/assets/asset-by-id.yaml'
 
-  /notes:
-    $ref: './paths/notes/notes.yaml'
+  /stats/overview:
+    $ref: './paths/stats/overview.yaml'
 
-  /notes/{id}:
-    $ref: './paths/notes/notes-by-id.yaml'
+  /stats/category:
+    $ref: './paths/stats/category.yaml'
 
-  /stats:
-    $ref: './paths/stats/stats.yaml'
+  /stats/trend:
+    $ref: './paths/stats/trend.yaml'
