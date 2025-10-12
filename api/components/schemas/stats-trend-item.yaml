@@ -2,6 +2,6 @@ type: object
 properties:
   date:
     type: string
-    format: date
-  value:
+    format: date-time
+  totalValue:
     type: number
