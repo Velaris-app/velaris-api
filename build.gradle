@@ -127,7 +127,7 @@ tasks.withType(KotlinCompile).configureEach {
 tasks.register('kotlinClientJar', Jar) {
     archiveBaseName.set("kotlin-client")
     dependsOn tasks.named("openApiGenerateKotlinClient")
-    from(generatedKotlinClientDir)
+    from(tasks.named("compileKotlin").get().destinationDirectory)
 
     inputs.dir(generatedKotlinClientDir)
     outputs.file(layout.buildDirectory.file("libs/kotlin-client.jar"))
@@ -154,7 +154,7 @@ publishing {
             groupId = project.group
             artifactId = "velaris-api-client"
             version = project.version
-            artifact(tasks.named("kotlinClientJar"))
+            artifact(tasks.named("kotlinClientJar").get())
         }
     }
 
