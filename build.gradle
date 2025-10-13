@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
 plugins {
@@ -5,6 +7,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'pl.allegro.tech.build.axion-release' version '1.20.1'
+    id 'org.jetbrains.kotlin.jvm' version '2.2.20'
 }
 
 group = 'com.velaris.api'
@@ -30,10 +33,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-// --- Include generated server sources in compilation ---
+// --- Source sets ---
 sourceSets {
     main {
-        java.srcDirs += file("${generatedServerDir}/src/main/java")
+        java.srcDir("${generatedServerDir}/src/main/java")
+        java.srcDir("${generatedKotlinClientDir}/src/main/kotlin")
     }
 }
 
@@ -44,6 +48,14 @@ dependencies {
     implementation(libs.spring.boot.starter.validation)
     compileOnly(libs.swagger.annotations)
     compileOnly(libs.springdoc.openapi.ui)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.scalars)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.jetbrains.kotlinx.serialization.json)
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
 }
 
 // --- OpenAPI server generation ---
@@ -65,6 +77,9 @@ tasks.register("openApiGenerateServer", GenerateTask) {
             "useTags": "true"
     ])
 
+    inputs.file(inputSpec)
+    outputs.dir(generatedServerDir)
+
     doFirst { delete generatedServerDir }
 }
 
@@ -74,33 +89,56 @@ tasks.register("openApiGenerateKotlinClient", GenerateTask) {
     inputSpec.set("$rootDir/api/velaris-api.yaml")
     outputDir.set(generatedKotlinClientDir.toString())
 
+    packageName.set("com.velaris.api.client")
     apiPackage.set("com.velaris.api.client")
     modelPackage.set("com.velaris.api.client.model")
     invokerPackage.set("com.velaris.api.client.invoker")
-    packageName.set("com.velaris.api.client")
 
     configOptions.set([
-            "library": "jvm-retrofit2", // lub "multiplatform"
+            "library": "jvm-retrofit2",
             "dateLibrary": "java8",
             "serializationLibrary": "kotlinx_serialization",
             "useCoroutines": "true"
     ])
 
+    inputs.file(inputSpec)
+    outputs.dir(generatedKotlinClientDir)
+
     doFirst { delete generatedKotlinClientDir }
 }
 
-// --- Ensure server and Kotlin client code are generated before compilation ---
+// --- Ensure generation before compilation ---
 tasks.withType(JavaCompile).configureEach {
     dependsOn tasks.named("openApiGenerateServer")
-    dependsOn tasks.named("openApiGenerateKotlinClient")
 }
 
-tasks.withType(PublishToMavenRepository).configureEach {
+tasks.withType(KotlinCompile).configureEach {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+        freeCompilerArgs.addAll([
+                "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+        ])
+    }
     dependsOn tasks.named("openApiGenerateServer")
     dependsOn tasks.named("openApiGenerateKotlinClient")
 }
 
-// --- Publishing both server and client (oddzielne artefakty) ---
+// --- Jar dla klienta Kotlin ---
+tasks.register('kotlinClientJar', Jar) {
+    archiveBaseName.set("kotlin-client")
+    dependsOn tasks.named("openApiGenerateKotlinClient")
+    from(generatedKotlinClientDir)
+
+    inputs.dir(generatedKotlinClientDir)
+    outputs.file(layout.buildDirectory.file("libs/kotlin-client.jar"))
+}
+
+// --- Make Kotlin Jar part of assemble/build ---
+tasks.named("assemble") {
+    dependsOn("kotlinClientJar")
+}
+
+// --- Publishing ---
 publishing {
     publications {
         // Server
@@ -116,7 +154,7 @@ publishing {
             groupId = project.group
             artifactId = "velaris-api-client"
             version = project.version
-            artifact("$generatedKotlinClientDir/build/libs/kotlin-client.jar") // musisz utworzyć JAR klienta
+            artifact(tasks.named("kotlinClientJar"))
         }
     }
 
