@@ -1,3 +1,5 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     id 'org.openapi.generator' version '7.6.0'
     id 'java'
@@ -7,61 +9,48 @@ plugins {
 
 group = 'com.velaris.api'
 
+// --- Versioning (axion-release) ---
 scmVersion {
-    tag {
-        prefix = 'v'
-    }
+    tag { prefix = 'v' }
     versionIncrementer 'incrementPatch'
 }
-
 project.version = scmVersion.version
 
 repositories {
     mavenCentral()
 }
 
-def generatedDir = layout.buildDirectory.dir("generated/api").get().asFile
+// --- Paths for generated code ---
+def generatedServerDir = layout.buildDirectory.dir("generated/api").get().asFile
+def generatedKotlinClientDir = layout.buildDirectory.dir("generated/kotlin-client").get().asFile
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+// --- Include generated server sources in compilation ---
 sourceSets {
     main {
-        java.srcDirs += file("${generatedDir}/src/main/java")
+        java.srcDirs += file("${generatedServerDir}/src/main/java")
     }
 }
 
+// --- Dependencies ---
 dependencies {
     implementation(libs.jackson.databind.nullable)
-
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.validation)
-
     compileOnly(libs.swagger.annotations)
     compileOnly(libs.springdoc.openapi.ui)
 }
 
-tasks.withType(JavaCompile).configureEach {
-    dependsOn tasks.named("openApiGenerate")
-}
-
-tasks.named("compileJava") {
-    dependsOn tasks.named("openApiGenerate")
-}
-
-tasks.withType(PublishToMavenRepository).configureEach {
-    dependsOn tasks.named("openApiGenerate")
-}
-
-openApiGenerate {
+// --- OpenAPI server generation ---
+tasks.register("openApiGenerateServer", GenerateTask) {
     generatorName.set("spring")
     inputSpec.set("$rootDir/api/velaris-api.yaml")
-    outputDir.set(generatedDir.toString())
+    outputDir.set(generatedServerDir.toString())
 
     packageName.set("com.velaris")
     apiPackage.set("com.velaris.api")
@@ -73,27 +62,61 @@ openApiGenerate {
             "skipDefaultInterface": "true",
             "dateLibrary": "java8",
             "useSpringBoot3": "true",
-            "useTags": "true",
+            "useTags": "true"
     ])
+
+    doFirst { delete generatedServerDir }
 }
 
-tasks.named("openApiGenerate") {
-    doFirst {
-        delete generatedDir
-    }
+// --- OpenAPI Kotlin client generation ---
+tasks.register("openApiGenerateKotlinClient", GenerateTask) {
+    generatorName.set("kotlin")
+    inputSpec.set("$rootDir/api/velaris-api.yaml")
+    outputDir.set(generatedKotlinClientDir.toString())
+
+    apiPackage.set("com.velaris.api.client")
+    modelPackage.set("com.velaris.api.client.model")
+    invokerPackage.set("com.velaris.api.client.invoker")
+    packageName.set("com.velaris.api.client")
+
+    configOptions.set([
+            "library": "jvm-retrofit2", // lub "multiplatform"
+            "dateLibrary": "java8",
+            "serializationLibrary": "kotlinx_serialization",
+            "useCoroutines": "true"
+    ])
+
+    doFirst { delete generatedKotlinClientDir }
 }
 
-tasks.register("generateServer") {
-    dependsOn tasks.named("openApiGenerate")
+// --- Ensure server and Kotlin client code are generated before compilation ---
+tasks.withType(JavaCompile).configureEach {
+    dependsOn tasks.named("openApiGenerateServer")
+    dependsOn tasks.named("openApiGenerateKotlinClient")
 }
 
+tasks.withType(PublishToMavenRepository).configureEach {
+    dependsOn tasks.named("openApiGenerateServer")
+    dependsOn tasks.named("openApiGenerateKotlinClient")
+}
+
+// --- Publishing both server and client (oddzielne artefakty) ---
 publishing {
     publications {
-        create("mavenJava", MavenPublication) {
+        // Server
+        create("server", MavenPublication) {
             from components.java
             groupId = project.group
             artifactId = "velaris-api"
             version = project.version
+        }
+
+        // Kotlin client
+        create("kotlinClient", MavenPublication) {
+            groupId = project.group
+            artifactId = "velaris-api-client"
+            version = project.version
+            artifact("$generatedKotlinClientDir/build/libs/kotlin-client.jar") // musisz utworzyć JAR klienta
         }
     }
 
