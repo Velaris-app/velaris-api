@@ -4,5 +4,8 @@ properties:
     type: string
   totalValue:
     type: number
+    format: double
   itemCount:
+    type: integer
+  uniqueAssets:
     type: integer

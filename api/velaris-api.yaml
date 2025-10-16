@@ -42,6 +42,12 @@ components:
     StatsTrendItem:
       $ref: './components/schemas/stats-trend-item.yaml'
 
+    RecentActivitiesItem:
+      $ref: './components/schemas/recent-activities-item.yaml'
+
+    StatsTagItem:
+      $ref: './components/schemas/stats-tag-item.yaml'
+
 paths:
   /auth/register:
     $ref: './paths/auth/register.yaml'
@@ -54,6 +60,9 @@ paths:
 
   /assets/{id}:
     $ref: './paths/assets/asset-by-id.yaml'
+
+  /assets/activities:
+    $ref: './paths/assets/assets-activities.yaml'
 
   /stats/overview:
     $ref: './paths/stats/overview.yaml'

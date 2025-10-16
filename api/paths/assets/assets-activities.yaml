@@ -1,0 +1,16 @@
+get:
+  tags:
+    - assets
+  summary: Pobranie listy aktywności, związanych z aktywami
+  operationId: listAssetActivities
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Lista aktywności
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../components/schemas/recent-activities-item.yaml"

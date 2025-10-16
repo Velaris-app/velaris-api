@@ -1,0 +1,22 @@
+type: object
+properties:
+  assetId:
+    type: integer
+  name:
+    type: string
+  category:
+    type: string
+  purchasePrice:
+    type: number
+    format: double
+  quantity:
+    type: integer
+  createdAt:
+    type: string
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time
+  activityType:
+    allOf:
+      - $ref: "./enums/activity-type.yaml"

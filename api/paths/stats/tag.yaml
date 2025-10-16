@@ -1,0 +1,16 @@
+get:
+  tags:
+    - stats
+  summary: Statystyki portfolio według tagów
+  operationId: getStatsTag
+  security:
+    - bearerAuth: []
+  responses:
+    "200":
+      description: Lista statystyk według tagów
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../components/schemas/stats-tag-item.yaml"

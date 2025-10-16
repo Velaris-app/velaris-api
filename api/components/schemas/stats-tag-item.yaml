@@ -1,10 +1,9 @@
 type: object
 properties:
-  date:
+  tag:
     type: string
-    format: date-time
   totalValue:
     type: number
     format: double
-  itemsAdded:
+  assetsCount:
     type: integer
