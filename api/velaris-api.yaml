@@ -72,3 +72,5 @@ paths:
 
   /stats/trend:
     $ref: './paths/stats/trend.yaml'
+  /stats/tag:
+    $ref: './paths/stats/tag.yaml'
