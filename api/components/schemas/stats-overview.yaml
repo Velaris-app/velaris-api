@@ -2,7 +2,6 @@ type: object
 properties:
   totalValue:
     type: number
-    format: double
   currency:
     type: string
   totalItems:

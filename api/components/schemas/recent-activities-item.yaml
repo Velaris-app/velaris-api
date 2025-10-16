@@ -8,7 +8,6 @@ properties:
     type: string
   purchasePrice:
     type: number
-    format: double
   quantity:
     type: integer
   createdAt:

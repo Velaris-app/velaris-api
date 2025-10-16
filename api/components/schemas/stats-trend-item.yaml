@@ -5,6 +5,5 @@ properties:
     format: date-time
   totalValue:
     type: number
-    format: double
   itemsAdded:
     type: integer
