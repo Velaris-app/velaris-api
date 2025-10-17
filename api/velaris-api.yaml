@@ -19,48 +19,48 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
-schemas:
-  User:
-    $ref: './components/schemas/user.yaml'
+  schemas:
+    User:
+      $ref: './components/schemas/user.yaml'
 
-  JwtResponse:
-    $ref: './components/schemas/jwt-response.yaml'
+    JwtResponse:
+      $ref: './components/schemas/jwt-response.yaml'
 
-  RegisterRequest:
-    $ref: './components/schemas/register-request.yaml'
+    RegisterRequest:
+      $ref: './components/schemas/register-request.yaml'
 
-  LoginRequest:
-    $ref: './components/schemas/login-request.yaml'
+    LoginRequest:
+      $ref: './components/schemas/login-request.yaml'
 
-  Asset:
-    $ref: './components/schemas/asset.yaml'
+    Asset:
+      $ref: './components/schemas/asset.yaml'
 
-  Note:
-    $ref: './components/schemas/note.yaml'
+    Note:
+      $ref: './components/schemas/note.yaml'
 
-  StatsOverview:
-    $ref: './components/schemas/stats-overview.yaml'
+    StatsOverview:
+      $ref: './components/schemas/stats-overview.yaml'
 
-  StatsCategoryItem:
-    $ref: './components/schemas/stats-category-item.yaml'
+    StatsCategoryItem:
+      $ref: './components/schemas/stats-category-item.yaml'
 
-  StatsTrendItem:
-    $ref: './components/schemas/stats-trend-item.yaml'
+    StatsTrendItem:
+      $ref: './components/schemas/stats-trend-item.yaml'
 
-  RecentActivitiesItem:
-    $ref: './components/schemas/recent-activities-item.yaml'
+    RecentActivitiesItem:
+      $ref: './components/schemas/recent-activities-item.yaml'
 
-  StatsTagItem:
-    $ref: './components/schemas/stats-tag-item.yaml'
+    StatsTagItem:
+      $ref: './components/schemas/stats-tag-item.yaml'
 
-  StatsTrendDiffItem:
-    $ref: './components/schemas/stats-trend-diff-item.yaml'
+    StatsTrendDiffItem:
+      $ref: './components/schemas/stats-trend-diff-item.yaml'
 
-  StatsTopMoversItem:
-    $ref: './components/schemas/stats-top-movers-item.yaml'
+    StatsTopMoversItem:
+      $ref: './components/schemas/stats-top-movers-item.yaml'
 
-  StatsCategoryTrendItem:
-    $ref: './components/schemas/stats-category-trend-item.yaml'
+    StatsCategoryTrendItem:
+      $ref: './components/schemas/stats-category-trend-item.yaml'
 
 paths:
   /auth/register:

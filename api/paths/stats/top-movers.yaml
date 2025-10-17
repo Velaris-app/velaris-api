@@ -13,4 +13,4 @@ get:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/StatsTopMoversItem'
+              $ref: '../../components/schemas/stats-top-movers-item.yaml'

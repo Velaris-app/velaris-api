@@ -13,4 +13,4 @@ get:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/StatsTrendDiffItem'
+              $ref: '../../components/schemas/stats-trend-diff-item.yaml'

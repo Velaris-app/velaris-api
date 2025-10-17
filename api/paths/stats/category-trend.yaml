@@ -19,4 +19,4 @@ get:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/StatsCategoryTrendItem'
+              $ref: '../../components/schemas/stats-category-trend-item.yaml'
