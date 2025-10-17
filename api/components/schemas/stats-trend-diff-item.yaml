@@ -9,3 +9,4 @@ properties:
     type: number
   deltaPercent:
     type: number
+    format: double

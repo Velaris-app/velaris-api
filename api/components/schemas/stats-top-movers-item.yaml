@@ -2,6 +2,7 @@ type: object
 properties:
   assetId:
     type: integer
+    format: int64
   name:
     type: string
   category:
