@@ -18,39 +18,49 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-  schemas:
-    User:
-      $ref: './components/schemas/user.yaml'
 
-    JwtResponse:
-      $ref: './components/schemas/jwt-response.yaml'
+schemas:
+  User:
+    $ref: './components/schemas/user.yaml'
 
-    RegisterRequest:
-      $ref: './components/schemas/register-request.yaml'
+  JwtResponse:
+    $ref: './components/schemas/jwt-response.yaml'
 
-    LoginRequest:
-      $ref: './components/schemas/login-request.yaml'
+  RegisterRequest:
+    $ref: './components/schemas/register-request.yaml'
 
-    Asset:
-      $ref: './components/schemas/asset.yaml'
+  LoginRequest:
+    $ref: './components/schemas/login-request.yaml'
 
-    Note:
-      $ref: './components/schemas/note.yaml'
+  Asset:
+    $ref: './components/schemas/asset.yaml'
 
-    StatsOverview:
-      $ref: './components/schemas/stats-overview.yaml'
+  Note:
+    $ref: './components/schemas/note.yaml'
 
-    StatsCategoryItem:
-      $ref: './components/schemas/stats-category-item.yaml'
+  StatsOverview:
+    $ref: './components/schemas/stats-overview.yaml'
 
-    StatsTrendItem:
-      $ref: './components/schemas/stats-trend-item.yaml'
+  StatsCategoryItem:
+    $ref: './components/schemas/stats-category-item.yaml'
 
-    RecentActivitiesItem:
-      $ref: './components/schemas/recent-activities-item.yaml'
+  StatsTrendItem:
+    $ref: './components/schemas/stats-trend-item.yaml'
 
-    StatsTagItem:
-      $ref: './components/schemas/stats-tag-item.yaml'
+  RecentActivitiesItem:
+    $ref: './components/schemas/recent-activities-item.yaml'
+
+  StatsTagItem:
+    $ref: './components/schemas/stats-tag-item.yaml'
+
+  StatsTrendDiffItem:
+    $ref: './components/schemas/stats-trend-diff-item.yaml'
+
+  StatsTopMoversItem:
+    $ref: './components/schemas/stats-top-movers-item.yaml'
+
+  StatsCategoryTrendItem:
+    $ref: './components/schemas/stats-category-trend-item.yaml'
 
 paths:
   /auth/register:
@@ -76,5 +86,15 @@ paths:
 
   /stats/trend:
     $ref: './paths/stats/trend.yaml'
+
   /stats/tag:
     $ref: './paths/stats/tag.yaml'
+
+  /stats/trend-diff:
+    $ref: './paths/stats/trend-diff.yaml'
+
+  /stats/top-movers:
+    $ref: './paths/stats/top-movers.yaml'
+
+  /stats/category-trend:
+    $ref: './paths/stats/category-trend.yaml'

@@ -1,0 +1,11 @@
+type: object
+properties:
+  date:
+    type: string
+    format: date-time
+  totalValue:
+    type: number
+  deltaValue:
+    type: number
+  deltaPercent:
+    type: number

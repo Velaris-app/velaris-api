@@ -1,0 +1,9 @@
+type: object
+properties:
+  category:
+    type: string
+  createdDate:
+    type: string
+    format: date-time
+  totalValue:
+    type: number

@@ -1,0 +1,12 @@
+type: object
+properties:
+  assetId:
+    type: integer
+  name:
+    type: string
+  category:
+    type: string
+  totalValue:
+    type: number
+  deltaValue:
+    type: number

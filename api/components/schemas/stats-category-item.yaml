@@ -8,3 +8,6 @@ properties:
     type: integer
   uniqueAssets:
     type: integer
+  percentageOfTotal:
+    type: number
+    format: double

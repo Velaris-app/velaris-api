@@ -1,0 +1,16 @@
+get:
+  tags:
+    - stats
+  summary: Get trend difference stats (delta value / percent)
+  operationId: getTrendDiffStats
+  security:
+    - bearerAuth: [ ]
+  responses:
+    '200':
+      description: List of trend diff stats
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/StatsTrendDiffItem'
