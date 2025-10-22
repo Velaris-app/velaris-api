@@ -1,0 +1,18 @@
+type: object
+required:
+  - grant_type
+properties:
+  grant_type:
+    type: string
+    enum:
+      - password
+      - refresh_token
+  username:
+    type: string
+    description: "Nazwa użytkownika (wymagane przy grant_type=password)"
+  password:
+    type: string
+    description: "Hasło użytkownika (wymagane przy grant_type=password)"
+  refresh_token:
+    type: string
+    description: "Refresh token (wymagany przy grant_type=refresh_token)"

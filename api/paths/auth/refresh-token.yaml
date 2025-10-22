@@ -1,17 +1,17 @@
 post:
   tags:
     - auth
-  summary: Register a new user
-  operationId: registerUser
+  summary: Refresh access token using refresh token
+  operationId: refreshToken
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/register-request.yaml'
+          $ref: '../../components/schemas/refresh-token-request.yaml'
   responses:
     '200':
-      description: Registered user
+      description: New access token issued
       content:
         application/json:
           schema:

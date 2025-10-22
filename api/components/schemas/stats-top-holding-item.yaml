@@ -1,13 +1,8 @@
 type: object
 properties:
-  assetId:
-    type: integer
-    format: int64
   name:
     type: string
   category:
     type: string
   totalValue:
-    type: number
-  deltaValue:
     type: number

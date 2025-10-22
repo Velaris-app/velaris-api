@@ -1,8 +1,8 @@
 post:
   tags:
     - stats
-  summary: Get category trend over time
-  operationId: getCategoryTrend
+  summary: Get top holdings
+  operationId: getTopHoldings
   security:
     - bearerAuth: [ ]
   requestBody:
@@ -10,13 +10,13 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/category-trend-request.yaml'
+          $ref: '../../components/schemas/top-holdings-request.yaml'
   responses:
     '200':
-      description: List of category trend items
+      description: List of top holdings movers
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/stats-category-trend-item.yaml'
+              $ref: '../../components/schemas/stats-top-holding-item.yaml'

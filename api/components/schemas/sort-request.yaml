@@ -1,0 +1,8 @@
+type: object
+properties:
+  sortBy:
+    type: string
+    default: currentValue
+    description: Pole do sortowania
+  sortDirection:
+    $ref: './enums/sort-direction.yaml'

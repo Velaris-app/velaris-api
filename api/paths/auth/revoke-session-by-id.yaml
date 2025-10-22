@@ -1,0 +1,16 @@
+delete:
+  tags:
+    - auth
+  summary: Revoke a specific session by ID
+  operationId: deleteSession
+  security:
+    - bearerAuth: [ ]
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '204':
+      description: Session revoked

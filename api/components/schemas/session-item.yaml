@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: string
+  userAgent:
+    type: string
+  ip:
+    type: string
+  createdAt:
+    type: string
+    format: date-time
+  lastUsedAt:
+    type: string
+    format: date-time

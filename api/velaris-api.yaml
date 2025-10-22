@@ -20,17 +20,20 @@ components:
       bearerFormat: JWT
 
   schemas:
-    User:
-      $ref: './components/schemas/user.yaml'
-
-    JwtResponse:
-      $ref: './components/schemas/jwt-response.yaml'
-
     RegisterRequest:
       $ref: './components/schemas/register-request.yaml'
 
-    LoginRequest:
-      $ref: './components/schemas/login-request.yaml'
+    TokenRequest:
+      $ref: './components/schemas/token-request.yaml'
+
+    TokenResponse:
+      $ref: './components/schemas/token-response.yaml'
+
+    RefreshTokenRequest:
+      $ref: './components/schemas/refresh-token-request.yaml'
+
+    SessionItem:
+      $ref: './components/schemas/session-item.yaml'
 
     Asset:
       $ref: './components/schemas/asset.yaml'
@@ -38,36 +41,66 @@ components:
     Note:
       $ref: './components/schemas/note.yaml'
 
-    StatsOverview:
+    OverviewItem:
       $ref: './components/schemas/stats-overview.yaml'
 
-    StatsCategoryItem:
+    CategoryItem:
       $ref: './components/schemas/stats-category-item.yaml'
 
-    StatsTrendItem:
+    TrendItem:
       $ref: './components/schemas/stats-trend-item.yaml'
 
     RecentActivitiesItem:
       $ref: './components/schemas/recent-activities-item.yaml'
 
-    StatsTagItem:
+    TagItem:
       $ref: './components/schemas/stats-tag-item.yaml'
 
-    StatsTrendDiffItem:
+    TrendDiffItem:
       $ref: './components/schemas/stats-trend-diff-item.yaml'
 
-    StatsTopMoversItem:
-      $ref: './components/schemas/stats-top-movers-item.yaml'
+    TopHoldingItem:
+      $ref: './components/schemas/stats-top-holding-item.yaml'
 
-    StatsCategoryTrendItem:
+    CategoryTrendItem:
       $ref: './components/schemas/stats-category-trend-item.yaml'
+
+    Period:
+      $ref: './components/schemas/enums/period.yaml'
+
+    TrendRequest:
+      $ref: './components/schemas/trend-request.yaml'
+
+    CategoryTrendRequest:
+      $ref: './components/schemas/category-trend-request.yaml'
+
+    TopHoldingsRequest:
+      $ref: './components/schemas/top-holdings-request.yaml'
+
+    SortDirection:
+      $ref: './components/schemas/enums/sort-direction.yaml'
+
+    PageRequest:
+      $ref: './components/schemas/page-request.yaml'
+
+    SortRequest:
+      $ref: './components/schemas/sort-request.yaml'
 
 paths:
   /auth/register:
     $ref: './paths/auth/register.yaml'
 
-  /auth/login:
-    $ref: './paths/auth/login.yaml'
+  /auth/token:
+    $ref: './paths/auth/token.yaml'
+
+  /auth/refresh-token:
+    $ref: './paths/auth/refresh-token.yaml'
+
+  /auth/sessions:
+    $ref: './paths/auth/sessions.yaml'
+
+  /auth/sessions/{id}:
+    $ref: './paths/auth/revoke-session-by-id.yaml'
 
   /assets:
     $ref: './paths/assets/assets.yaml'
@@ -93,8 +126,8 @@ paths:
   /stats/trend-diff:
     $ref: './paths/stats/trend-diff.yaml'
 
-  /stats/top-movers:
-    $ref: './paths/stats/top-movers.yaml'
+  /stats/top-holdings:
+    $ref: './paths/stats/top-holdings.yaml'
 
   /stats/category-trend:
     $ref: './paths/stats/category-trend.yaml'

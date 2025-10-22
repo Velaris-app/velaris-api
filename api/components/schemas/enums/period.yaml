@@ -1,0 +1,6 @@
+type: string
+description: Zakres czasu dla statystyk
+enum:
+  - WEEK
+  - MONTH
+  - YEAR

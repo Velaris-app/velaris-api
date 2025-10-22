@@ -1,0 +1,33 @@
+get:
+  tags:
+    - auth
+  summary: Get all active sessions for current user
+  operationId: getSessions
+  security:
+    - bearerAuth: [ ]
+  responses:
+    '200':
+      description: List of active sessions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/session-item.yaml'
+
+delete:
+  tags:
+    - auth
+  summary: Revoke a specific session by ID
+  operationId: deleteSession
+  security:
+    - bearerAuth: [ ]
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '204':
+      description: Session revoked

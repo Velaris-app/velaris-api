@@ -1,0 +1,15 @@
+type: object
+properties:
+  category:
+    type: string
+    description: Nazwa kategorii do filtrowania
+  startDate:
+    type: string
+    format: date
+    description: Data początkowa zakresu (priorytet nad period)
+  endDate:
+    type: string
+    format: date
+    description: Data końcowa zakresu (priorytet nad period)
+  period:
+    $ref: './enums/period.yaml'

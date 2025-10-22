@@ -1,0 +1,6 @@
+type: string
+description: Kierunek sortowania
+enum:
+  - ASC
+  - DESC
+default: DESC
