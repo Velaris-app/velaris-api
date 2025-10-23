@@ -21,70 +21,67 @@ components:
 
   schemas:
     RegisterRequest:
-      $ref: './components/schemas/register-request.yaml'
+      $ref: './components/schemas/auth/register-request.yaml'
 
     TokenRequest:
-      $ref: './components/schemas/token-request.yaml'
+      $ref: './components/schemas/auth/token-request.yaml'
 
     TokenResponse:
-      $ref: './components/schemas/token-response.yaml'
+      $ref: './components/schemas/auth/token-response.yaml'
 
     RefreshTokenRequest:
-      $ref: './components/schemas/refresh-token-request.yaml'
+      $ref: './components/schemas/auth/refresh-token-request.yaml'
 
     SessionItem:
-      $ref: './components/schemas/session-item.yaml'
+      $ref: './components/schemas/auth/session-item.yaml'
 
     Asset:
-      $ref: './components/schemas/asset.yaml'
-
-    Note:
-      $ref: './components/schemas/note.yaml'
+      $ref: './components/schemas/assets/asset.yaml'
 
     OverviewItem:
-      $ref: './components/schemas/stats-overview.yaml'
+      $ref: './components/schemas/stats/overview-item.yaml'
 
     CategoryItem:
-      $ref: './components/schemas/stats-category-item.yaml'
+      $ref: './components/schemas/stats/category-item.yaml'
 
     TrendItem:
-      $ref: './components/schemas/stats-trend-item.yaml'
+      $ref: './components/schemas/stats/trend-item.yaml'
 
     RecentActivitiesItem:
-      $ref: './components/schemas/recent-activities-item.yaml'
+      $ref: './components/schemas/assets/recent-activities-item.yaml'
 
     TagItem:
-      $ref: './components/schemas/stats-tag-item.yaml'
+      $ref: './components/schemas/stats/tag-item.yaml'
 
     TrendDiffItem:
-      $ref: './components/schemas/stats-trend-diff-item.yaml'
+      $ref: './components/schemas/stats/trend-diff-item.yaml'
 
     TopHoldingItem:
-      $ref: './components/schemas/stats-top-holding-item.yaml'
+      $ref: './components/schemas/stats/top-holding-item.yaml'
 
     CategoryTrendItem:
-      $ref: './components/schemas/stats-category-trend-item.yaml'
+      $ref: './components/schemas/stats/category-trend-item.yaml'
 
     Period:
       $ref: './components/schemas/enums/period.yaml'
 
     TrendRequest:
-      $ref: './components/schemas/trend-request.yaml'
+      $ref: './components/schemas/stats/trend-request.yaml'
 
     CategoryTrendRequest:
-      $ref: './components/schemas/category-trend-request.yaml'
-
-    TopHoldingsRequest:
-      $ref: './components/schemas/top-holdings-request.yaml'
+      $ref: './components/schemas/stats/category-trend-request.yaml'
 
     SortDirection:
       $ref: './components/schemas/enums/sort-direction.yaml'
 
     PageRequest:
-      $ref: './components/schemas/page-request.yaml'
+      $ref: './components/schemas/filtering/pagination-request.yaml'
 
     SortRequest:
-      $ref: './components/schemas/sort-request.yaml'
+      $ref: './components/schemas/filtering/sort-request.yaml'
+
+    SearchFilter:
+      $ref: './components/schemas/filtering/search-filter.yaml'
 
 paths:
   /auth/register:

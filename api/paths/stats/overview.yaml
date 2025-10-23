@@ -11,4 +11,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/stats-overview.yaml"
+            $ref: "../../components/schemas/stats/overview-item.yaml"

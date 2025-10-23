@@ -13,4 +13,4 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/stats-category-item.yaml"
+              $ref: "../../components/schemas/stats/category-item.yaml"

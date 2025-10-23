@@ -13,7 +13,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/asset.yaml"
+              $ref: "../../components/schemas/assets/asset.yaml"
 post:
   tags:
     - assets
@@ -26,11 +26,11 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../components/schemas/asset.yaml"
+          $ref: "../../components/schemas/assets/asset.yaml"
   responses:
     "201":
       description: Utworzone aktywo
       content:
         application/json:
           schema:
-            $ref: "../../components/schemas/asset.yaml"
+            $ref: "../../components/schemas/assets/asset.yaml"

@@ -8,11 +8,11 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/refresh-token-request.yaml'
+          $ref: '../../components/schemas/auth/refresh-token-request.yaml'
   responses:
     '200':
       description: New access token issued
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/token-response.yaml'
+            $ref: '../../components/schemas/auth/token-response.yaml'

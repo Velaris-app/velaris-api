@@ -5,4 +5,4 @@ properties:
     default: currentValue
     description: Pole do sortowania
   sortDirection:
-    $ref: './enums/sort-direction.yaml'
+    $ref: '../enums/sort-direction.yaml'

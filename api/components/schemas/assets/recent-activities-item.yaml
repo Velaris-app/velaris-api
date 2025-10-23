@@ -18,4 +18,4 @@ properties:
     format: date-time
   activityType:
     allOf:
-      - $ref: "./enums/activity-type.yaml"
+      - $ref: "../enums/activity-type.yaml"

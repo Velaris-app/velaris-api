@@ -11,33 +11,14 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/token-request.yaml'
+          $ref: '../../components/schemas/auth/token-request.yaml'
   responses:
     '200':
       description: "Access i refresh token"
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - access_token
-              - refresh_token
-              - expires_in
-              - token_type
-            properties:
-              access_token:
-                type: string
-                description: "JWT access token"
-              refresh_token:
-                type: string
-                description: "JWT refresh token"
-              expires_in:
-                type: integer
-                description: "Czas życia access tokena w sekundach"
-              token_type:
-                type: string
-                default: "Bearer"
-                description: "Typ tokena"
+            $ref: '../../components/schemas/auth/token-response.yaml'
     '400':
       description: "Błąd requestu, np. brak wymaganych pól"
     '401':

@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/category-trend-request.yaml'
+          $ref: '../../components/schemas/stats/category-trend-request.yaml'
   responses:
     '200':
       description: List of category trend items
@@ -19,4 +19,4 @@ post:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/stats-category-trend-item.yaml'
+              $ref: '../../components/schemas/stats/category-trend-item.yaml'

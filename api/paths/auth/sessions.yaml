@@ -13,7 +13,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '../../components/schemas/session-item.yaml'
+              $ref: '../../components/schemas/auth/session-item.yaml'
 
 delete:
   tags:

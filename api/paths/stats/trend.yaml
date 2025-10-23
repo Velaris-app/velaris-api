@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../components/schemas/trend-request.yaml"
+          $ref: "../../components/schemas/stats/trend-request.yaml"
   responses:
     "200":
       description: Trend wartości portfolio
@@ -19,4 +19,4 @@ post:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/stats-trend-item.yaml"
+              $ref: "../../components/schemas/stats/trend-item.yaml"

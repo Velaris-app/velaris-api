@@ -1,6 +1,6 @@
 type: object
 properties:
-  pageRequest:
-    $ref: './page-request.yaml'
+  paginationRequest:
+    $ref: './pagination-request.yaml'
   sortRequest:
     $ref: './sort-request.yaml'

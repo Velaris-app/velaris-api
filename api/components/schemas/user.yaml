@@ -1,8 +1,0 @@
-type: object
-properties:
-  userId:
-    type: string
-  email:
-    type: string
-  username:
-    type: string

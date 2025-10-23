@@ -13,4 +13,4 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../components/schemas/recent-activities-item.yaml"
+              $ref: "../../components/schemas/assets/recent-activities-item.yaml"
