@@ -3,10 +3,8 @@ required:
   - grant_type
 properties:
   grant_type:
-    type: string
-    enum:
-      - password
-      - refresh_token
+    allOf:
+      - $ref: '../enums/grant-type.yaml'
   username:
     type: string
     description: "Nazwa użytkownika (wymagane przy grant_type=password)"

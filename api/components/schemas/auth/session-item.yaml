@@ -2,9 +2,11 @@ type: object
 properties:
   id:
     type: string
+  deviceInfo:
+    type: string
   userAgent:
     type: string
-  ip:
+  ipAddress:
     type: string
   createdAt:
     type: string

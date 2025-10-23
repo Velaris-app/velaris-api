@@ -29,9 +29,6 @@ components:
     TokenResponse:
       $ref: './components/schemas/auth/token-response.yaml'
 
-    RefreshTokenRequest:
-      $ref: './components/schemas/auth/refresh-token-request.yaml'
-
     SessionItem:
       $ref: './components/schemas/auth/session-item.yaml'
 
@@ -89,9 +86,6 @@ paths:
 
   /auth/token:
     $ref: './paths/auth/token.yaml'
-
-  /auth/refresh-token:
-    $ref: './paths/auth/refresh-token.yaml'
 
   /auth/sessions:
     $ref: './paths/auth/sessions.yaml'

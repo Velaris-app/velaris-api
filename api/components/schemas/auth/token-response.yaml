@@ -7,6 +7,10 @@ properties:
   expiresIn:
     type: integer
     description: Expiration of access token in seconds
+  refreshExpiresIn:
+    type: integer
+    description: Expiration of refresh token in seconds
+  sessionState:
+    type: string
   tokenType:
     type: string
-    enum: [ access, refresh ]

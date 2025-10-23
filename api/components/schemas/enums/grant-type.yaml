@@ -1,0 +1,5 @@
+type: string
+description: Different types of grant types
+enum:
+  - password
+  - refresh_token
