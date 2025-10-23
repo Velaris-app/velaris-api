@@ -18,16 +18,10 @@ get:
 delete:
   tags:
     - auth
-  summary: Revoke a specific session by ID
-  operationId: deleteSession
+  summary: Revoke all active sessions for current user
+  operationId: revokeSessions
   security:
     - bearerAuth: [ ]
-  parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
   responses:
     '204':
-      description: Session revoked
+      description: Sessions revoked successfully

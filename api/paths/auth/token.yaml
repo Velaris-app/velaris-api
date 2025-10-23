@@ -2,6 +2,7 @@ post:
   tags:
     - auth
   summary: "Uzyskaj access i refresh token"
+  operationId: getToken
   description: |
     Grant types:
     - password → logowanie użytkownika
