@@ -11,6 +11,7 @@ delete:
       required: true
       schema:
         type: string
+        format: uuid
   responses:
     '204':
       description: Session revoked

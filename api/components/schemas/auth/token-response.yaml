@@ -14,5 +14,6 @@ properties:
     description: Expiration of refresh token in seconds
   sessionState:
     type: string
+    format: uuid
   tokenType:
     type: string
