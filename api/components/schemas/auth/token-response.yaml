@@ -6,9 +6,11 @@ properties:
     type: string
   expiresIn:
     type: integer
+    format: int64
     description: Expiration of access token in seconds
   refreshExpiresIn:
     type: integer
+    format: int64
     description: Expiration of refresh token in seconds
   sessionState:
     type: string
