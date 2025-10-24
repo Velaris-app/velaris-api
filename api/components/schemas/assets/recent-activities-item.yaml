@@ -2,20 +2,18 @@ type: object
 properties:
   assetId:
     type: integer
-  name:
-    type: string
-  category:
-    type: string
-  purchasePrice:
-    type: number
-  quantity:
-    type: integer
-  createdAt:
-    type: string
-    format: date-time
-  updatedAt:
-    type: string
-    format: date-time
   activityType:
     allOf:
       - $ref: "../enums/activity-type.yaml"
+  changeDate:
+    type: string
+    format: date-time
+    description: "Data i czas zmiany"
+  changedFields:
+    type: object
+    additionalProperties:
+      type: string
+    nullable: true
+required:
+  - activityType
+  - changeDate
