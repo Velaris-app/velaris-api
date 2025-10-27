@@ -38,7 +38,7 @@ java {
 sourceSets {
     main {
         java.srcDir("${generatedServerDir}/src/main/java")
-        java.srcDir("${generatedKotlinClientDir}/src/main/kotlin")
+        kotlin.srcDir("${generatedKotlinClientDir}/src/main/kotlin")
     }
 }
 
@@ -122,18 +122,18 @@ tasks.withType(KotlinCompile).configureEach {
                 "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
         ])
     }
-    dependsOn tasks.named("openApiGenerateServer")
-    dependsOn tasks.named("openApiGenerateKotlinClient")
 }
 
-// --- Jar dla klienta Kotlin ---
 tasks.register('kotlinClientJar', Jar) {
     archiveBaseName.set("kotlin-client")
-    dependsOn tasks.named("openApiGenerateKotlinClient")
-    from(tasks.named("compileKotlin").get().destinationDirectory)
 
-    inputs.dir(generatedKotlinClientDir)
-    outputs.file(layout.buildDirectory.file("libs/kotlin-client.jar"))
+    dependsOn openApiGenerateKotlinClient
+    dependsOn compileKotlin
+
+    from compileKotlin.destinationDirectory
+
+    inputs.dir generatedKotlinClientDir
+    outputs.file layout.buildDirectory.file("libs/kotlin-client.jar")
 }
 
 // --- Make Kotlin Jar part of assemble/build ---
