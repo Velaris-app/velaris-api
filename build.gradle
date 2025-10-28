@@ -154,6 +154,7 @@ publishing {
             groupId = project.group
             artifactId = "velaris-api-server"
             version = project.version
+            artifact(tasks.named("jar").get())
         }
 
         // Kotlin client
