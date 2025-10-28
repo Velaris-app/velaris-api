@@ -1,6 +1,6 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id 'org.openapi.generator' version '7.6.0'
@@ -8,7 +8,7 @@ plugins {
     id 'maven-publish'
     id 'pl.allegro.tech.build.axion-release' version '1.20.1'
     id 'org.jetbrains.kotlin.jvm' version '2.2.20'
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
+    id "org.jetbrains.kotlin.plugin.serialization" version "2.2.20"
 }
 
 group = 'com.velaris.api'
@@ -25,7 +25,7 @@ repositories {
 }
 
 // --- Paths for generated code ---
-def generatedServerDir = layout.buildDirectory.dir("generated/api").get().asFile
+def generatedServerDir = layout.buildDirectory.dir("generated/java-server").get().asFile
 def generatedKotlinClientDir = layout.buildDirectory.dir("generated/kotlin-client").get().asFile
 
 java {
@@ -37,7 +37,9 @@ java {
 // --- Source sets ---
 sourceSets {
     main {
-        java.srcDir("${generatedServerDir}/src/main/java")
+        java.srcDirs("${generatedServerDir}/src/main/java")
+    }
+    kotlinClient {
         kotlin.srcDir("${generatedKotlinClientDir}/src/main/kotlin")
     }
 }
@@ -110,35 +112,38 @@ tasks.register("openApiGenerateKotlinClient", GenerateTask) {
     doFirst { delete generatedKotlinClientDir }
 }
 
-// --- Ensure generation before compilation ---
-tasks.withType(JavaCompile).configureEach {
-    dependsOn tasks.named("openApiGenerateServer")
-}
-
+// --- Compile server Kotlin ---
 tasks.withType(KotlinCompile).configureEach {
+    dependsOn tasks.named("openApiGenerateKotlinClient")
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_21)
         freeCompilerArgs.addAll([
                 "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
         ])
     }
+    source = fileTree("${generatedKotlinClientDir}/src/main/kotlin")
 }
 
-tasks.register('kotlinClientJar', Jar) {
+// --- Ensure server generation before compilation ---
+tasks.withType(JavaCompile).configureEach {
+    dependsOn tasks.named("openApiGenerateServer")
+}
+
+tasks.named("jar").configure {
+    archiveBaseName.set("java-server")
+    dependsOn(tasks.named("openApiGenerateServer"))
+}
+
+// --- Kotlin client JAR (source only, bez compile) ---
+tasks.register("kotlinClientJar", Jar) {
     archiveBaseName.set("kotlin-client")
-
-    dependsOn openApiGenerateKotlinClient
-    dependsOn compileKotlin
-
-    from compileKotlin.destinationDirectory
-
-    inputs.dir generatedKotlinClientDir
-    outputs.file layout.buildDirectory.file("libs/kotlin-client.jar")
+    dependsOn tasks.withType(KotlinCompile)
+    from(generatedKotlinClientDir)
 }
 
 // --- Make Kotlin Jar part of assemble/build ---
 tasks.named("assemble") {
-    dependsOn("kotlinClientJar")
+    dependsOn tasks.named("kotlinClientJar")
 }
 
 // --- Publishing ---
@@ -146,9 +151,8 @@ publishing {
     publications {
         // Server
         create("server", MavenPublication) {
-            from components.java
             groupId = project.group
-            artifactId = "velaris-api"
+            artifactId = "velaris-api-server"
             version = project.version
         }
 
