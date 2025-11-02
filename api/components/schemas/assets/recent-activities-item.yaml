@@ -13,7 +13,6 @@ properties:
     type: object
     additionalProperties:
       type: string
-    nullable: true
 required:
   - activityType
   - changeDate
