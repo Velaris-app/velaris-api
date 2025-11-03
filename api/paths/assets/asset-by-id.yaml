@@ -58,7 +58,8 @@ delete:
       in: path
       required: true
       schema:
-        type: string
+        type: integer
+        format: int64
   responses:
     "204":
       description: Usunięto aktywo
