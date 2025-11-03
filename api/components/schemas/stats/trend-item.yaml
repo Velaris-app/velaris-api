@@ -2,7 +2,7 @@ type: object
 properties:
   date:
     type: string
-    format: date-time
+    format: date
   totalValue:
     type: number
   itemsAdded:

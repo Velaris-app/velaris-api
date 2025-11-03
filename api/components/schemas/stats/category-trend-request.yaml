@@ -13,3 +13,5 @@ properties:
     description: Data końcowa zakresu (priorytet nad period)
   period:
     $ref: '../enums/period.yaml'
+required:
+    - category
