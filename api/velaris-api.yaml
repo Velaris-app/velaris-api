@@ -59,8 +59,8 @@ components:
     CategoryTrendItem:
       $ref: './components/schemas/stats/category-trend-item.yaml'
 
-    Period:
-      $ref: './components/schemas/enums/period.yaml'
+    PeriodType:
+      $ref: './components/schemas/enums/period-type.yaml'
 
     TrendRequest:
       $ref: './components/schemas/stats/trend-request.yaml'

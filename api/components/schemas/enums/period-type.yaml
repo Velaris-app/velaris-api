@@ -4,3 +4,4 @@ enum:
   - WEEK
   - MONTH
   - YEAR
+  - CUSTOM
