@@ -1,0 +1,14 @@
+type: object
+description: Zakres czasu – daty lub predefiniowany okres (np. WEEK, MONTH, YEAR, CUSTOM)
+properties:
+  startDate:
+    type: string
+    format: date-time
+    description: Data początkowa zakresu
+  endDate:
+    type: string
+    format: date-time
+    description: Data końcowa zakresu
+  period:
+    $ref: '../enums/period-type.yaml'
+required: []

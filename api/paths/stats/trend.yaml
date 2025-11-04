@@ -10,7 +10,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../components/schemas/stats/trend-request.yaml"
+            $ref: '../../components/schemas/filtering/time-range.yaml'
   responses:
     "200":
       description: Trend wartości portfolio
