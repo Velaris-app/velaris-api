@@ -91,10 +91,10 @@ paths:
     $ref: './paths/auth/token.yaml'
 
   /auth/sessions:
-    $ref: './paths/auth/sessions.yaml'
+    $ref: './paths/sessions/sessions.yaml'
 
   /auth/sessions/{id}:
-    $ref: './paths/auth/revoke-session-by-id.yaml'
+    $ref: './paths/sessions/revoke-session-by-id.yaml'
 
   /assets:
     $ref: './paths/assets/assets.yaml'

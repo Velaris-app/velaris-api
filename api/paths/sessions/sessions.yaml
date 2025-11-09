@@ -1,6 +1,6 @@
 get:
   tags:
-    - auth
+    - session
   summary: Get all active sessions for current user
   operationId: getSessions
   security:
@@ -17,7 +17,7 @@ get:
 
 delete:
   tags:
-    - auth
+    - session
   summary: Revoke all active sessions for current user
   operationId: revokeSessions
   security:

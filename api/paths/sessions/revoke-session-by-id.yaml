@@ -1,6 +1,6 @@
 delete:
   tags:
-    - auth
+    - session
   summary: Revoke a specific session by ID
   operationId: deleteSession
   security:
